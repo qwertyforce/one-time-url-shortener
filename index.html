@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+   <link href="https://fonts.googleapis.com/css?family=Roboto:100i" rel="stylesheet">
+    <title>one_time_shortener</title>
+    <style type="text/css">
+body {
+    background: #28282e;
+    font-family: 'Roboto',sans-serif
+}
+#app {
+    justify-content: center;
+    align-items: center;
+    height: 55vh;
+    color: #d4d4d4;
+}
+.error{
+	visibility: visible !important;
+	border-color: #dd484885 !important;
+}
+.standard{
+	visibility: hidden;
+	border-radius: 8px 8px 8px 8px;
+    color: #d4d4d4;
+    border: .5px solid;
+}
+.ok{
+	visibility: visible !important;
+	border-color: #50ff3d94 !important;
+}
+#app,.InputAddOn {display: flex}
+.InputAddOn-field {flex: 1;margin: auto}
+.InputAddOn-field,.InputAddOn-item {border: 1px solid rgba(147,128,108,.25);padding: 1em 1.5em}
+.InputAddOn-field:first-child,.InputAddOn-item:first-child {border-radius: 2px 0 0 2px}
+.InputAddOn-field:last-child,.InputAddOn-item:last-child {border-radius: 0 2px 2px 0}
+@media (max-width:600px) {.InputAddOn {width: inherit}}
+@media (min-width:601px) {.InputAddOn { width: 60vw}}
+.text { display: flex;
+     justify-content: center;
+    align-items: center;
+}
+#text{
+      margin: auto;
+    max-width: max-content;
+}
+input[type=checkbox], input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+input[type=radio] {
+    bottom: 2px;
+}
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but one_time_url_shortener doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+    <div>
+    	<div class="text"><h1>Self destructing short links</h1></div>
+    	
+    	<div class="InputAddOn"> 
+  <input id="input_text" class="InputAddOn-field">
+  <button  class="InputAddOn-item" onclick="send_link()">shrt</button>
+</div>
+<div>
+ <input type="checkbox" id="myChk" checked />
+<label for="myChk">Preview protection (lack of referer  will end up in 403 error)</label>
+</div>
+<div>
+<label>Destroy after</label>
+<input type="number" id="destroy_after" style="width: 30px" min="1" value="1"  />
+<label>clicks</label>
+</div>
+<div>
+<label>Return error before </label>
+<input type="number" id="error_before" style="width: 30px" min="0" value="0"/>
+<label>clicks are made</label>
+</div>
+    </div>
+    </div>
+    <div id="text" class="standard">
+        <h2 id="ab" style="margin:10px;overflow-wrap: break-word;text-align: center;">
+        </h2>
+  </div>
+    	
+  </body>
+      <script type="text/javascript">
+        var checkbox=document.getElementById("myChk")
+         var input_element=document.getElementById('input_text')
+input_element.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        send_link()
+    }
+});
+        var domain="https://domainforshortenedlinks.com";
+      var regex2 = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9\wа-я]+([\-\.]{1}[a-z0-9\wа-я]+)*\.[a-z\wа-я]{2,5}(:[0-9]{1,5})?(\/.*)?$/igm)
+     
+      var element = document.getElementById("text");
+      function send_link(){
+      var destroy_after=document.getElementById('destroy_after').value
+      var error_before=document.getElementById('error_before').value
+      let string =input_element.value.trim();
+      console.log(string==="")
+      console.log((string==="")||!(regex2.test(string)))
+      if(!(regex2.test(string))){
+        if(string===""){
+            console.log(string==="")
+        console.log((string==="")||!(regex2.test(string)))
+        document.getElementById("ab").innerHTML = "Wrong link";
+          element.classList.remove("ok");
+          element.classList.add("error");
+          return
+        }
+      }
+var xhr = new XMLHttpRequest();
+xhr.open("POST", `${domain}/link`, true);
+xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+xhr.onreadystatechange = function() {
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      document.getElementById("ab").innerHTML = `${domain}/${this.responseText}`;
+        element.classList.remove("error");
+          element.classList.add("ok");
+    }
+}
+xhr.send(`url=${string}&preview_protection=${checkbox.checked}&destroy_after=${destroy_after}&error_before=${error_before}`); 
+      }
+    </script>
+</html>
