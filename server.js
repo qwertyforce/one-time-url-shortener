@@ -11,7 +11,6 @@ app.use(bodyParser.json());
 app.use(cors());
 var Links = {};
 const port=443;
-var Fallback_url="https://wikipedia.org/wiki/Special:Random"; 
 //  https.createServer({                                      //Uncomment if you want to use https 
 //       key: fs.readFileSync('key.pem'),
 //       cert: fs.readFileSync('cert.pem')
@@ -30,7 +29,7 @@ function handle_link(req,res,id){
     var link=Links[id];
    if (link.error_before!==0) {
     Links[id].error_before-=1;
-    res.sendStatus(503)
+    res.sendStatus(404)
     return
    }
    if(link.destroy_after!==0){
@@ -38,7 +37,7 @@ function handle_link(req,res,id){
      res.redirect(link.url);
    }else{
     delete Links[id]
-    res.sendStatus(503)
+    res.sendStatus(404)
    }
 }
 
@@ -83,12 +82,12 @@ app.get('/:id', (req, res) => {
              handle_link(req,res,id);
            }
            else{
-              res.sendStatus(503);
+              res.sendStatus(404);
            }
         }else{
              handle_link(req,res,id);
         }
     } else {
-        res.redirect(Fallback_url);
+        res.sendStatus(404);
     }
 });
