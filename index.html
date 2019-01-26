@@ -107,17 +107,11 @@ input_element.addEventListener("keydown", function(event) {
       var destroy_after=document.getElementById('destroy_after').value
       var error_before=document.getElementById('error_before').value
       let string =input_element.value.trim();
-      console.log(string==="")
-      console.log((string==="")||!(regex2.test(string)))
       if(!(regex2.test(string))){
-        if(string===""){
-            console.log(string==="")
-        console.log((string==="")||!(regex2.test(string)))
         document.getElementById("ab").innerHTML = "Wrong link";
           element.classList.remove("ok");
           element.classList.add("error");
           return
-        }
       }
 var xhr = new XMLHttpRequest();
 xhr.open("POST", `${domain}/link`, true);

@@ -9,6 +9,7 @@ const path = require('path');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
+app.disable('x-powered-by');
 var Links = {};
 const port=443;
 //  https.createServer({                                      //Uncomment if you want to use https 
@@ -72,7 +73,7 @@ app.post('/link', (req, res) => {
     });
 });
 app.get('/:id', (req, res) => {
-    console.log(req.headers.referer!==undefined)
+    console.log(`Referer header presented - ${req.headers.referer!==undefined}`)
     let id = req.params.id;
     var link = Links[id]
     console.log(link)
