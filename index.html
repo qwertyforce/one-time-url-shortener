@@ -100,7 +100,7 @@ input_element.addEventListener("keydown", function(event) {
     }
 });
         var domain="https://domainforshortenedlinks.com";
-      var regex2 = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9\wа-я]+([\-\.]{1}[a-z0-9\wа-я]+)*\.[a-z\wа-я]{2,5}(:[0-9]{1,5})?(\/.*)?$/igm)
+      var regex2 = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9\wа-я]+([\-\.]{1}[a-z0-9\wа-я]+)*\.[a-z\wа-я]{2,5}(:[0-9]{1,5})?(\/.*)?$/im)
      
       var element = document.getElementById("text");
       function send_link(){
