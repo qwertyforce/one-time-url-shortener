@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  	<style type="text/css">
+  	body{
+  		line-height: 1;
+  	}
+  		.InputAddOn {display: flex}
+.InputAddOn-field {flex: 1;margin: auto}
+.InputAddOn-field,.InputAddOn-item {border: 1px solid rgba(147,128,108,.25);padding: 0.5em 0.75em}
+.InputAddOn-field:first-child,.InputAddOn-item:first-child {border-radius: 2px 0 0 2px}
+.InputAddOn-field:last-child,.InputAddOn-item:last-child {border-radius: 0 2px 2px 0}
+label{
+	margin-bottom: 0px !important;
+	display: inline;
+}
+input[type=checkbox], input[type=radio] {
+    vertical-align: middle;
+    position: relative;
+    bottom: 1px;
+}
+input[type=radio] {
+    bottom: 2px;
+}
+
+  	</style>
+  </head>
+  <body>
+  	<div style="margin-left: 3px;margin-right: 3px;">
+<div class="InputAddOn">
+<input id="input_text" class="InputAddOn-field">
+<button class="InputAddOn-item" onclick="send_link()">shrt</button>
+</div>
+<div>
+<input type="checkbox" id="myChk" checked="">
+<label for="myChk">Preview protection (lack of referer will end up in 404 error)</label>
+</div>
+<div>
+<label>Destroy after</label>
+<input type="number" id="destroy_after" style="width: 30px" min="1" value="1">
+<label>clicks</label>
+</div>
+<div>
+<label>Return error before </label>
+<input type="number" id="error_before" style="width: 30px" min="0" value="0">
+<label>clicks are made</label>
+</div>
+</div>
+  </body>
+</html>
