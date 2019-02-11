@@ -6,3 +6,5 @@ This nodejs application can short your link and  adds some security featuers:
 2)Destroy after n clicks - link will be unavailable after n successful clicks
 
 3)Return error before n clicks are made - link will be unavailable before n successful clicks, then it will be available for n clicks  in second option 
+
+Example: https://shrt.qwertyforce.ru/
