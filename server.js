@@ -12,14 +12,16 @@ app.use(cors());
 app.disable('x-powered-by');
 var Links = {};
 const port=443;
-//  https.createServer({                                      //Uncomment if you want to use https 
-//       key: fs.readFileSync('key.pem'),
-//       cert: fs.readFileSync('cert.pem')
-//     }, app).listen(port);
-// console.log(`Server is listening on port ${port}`);
-app.listen(port, () => {          
-    console.log(`Server is listening on port ${port}`);
-});
+// app.listen(port, () => {                                     //Uncomment if you want to use http
+//     console.log(`Server is listening on port ${port}`);
+// });
+
+ https.createServer({
+      key: fs.readFileSync('privkey.pem'),
+      cert: fs.readFileSync('cert.pem')
+    }, app).listen(port);
+
+console.log(`Server is listening on port ${port}`);
 app.use( function(req, res, next) {
   if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico') {
     return res.sendStatus(204);
@@ -36,12 +38,14 @@ function handle_link(req,res,id){
    if(link.destroy_after!==0){
      Links[id].destroy_after-=1;
      res.redirect(link.url);
+     return
    }else{
     delete Links[id]
     res.sendStatus(404)
+    return
    }
+   
 }
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'))        //You can comment this and try to hide shortener web interface  (serve frontend from another domain for example)
 })
