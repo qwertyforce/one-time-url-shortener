@@ -99,14 +99,14 @@ input_element.addEventListener("keydown", function(event) {
         send_link()
     }
 });
-        var domain="https://domainforshortenedlinks.com";
+        var domain="https://link.qwertyforce.ru";
       var regex2 = new RegExp(/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9\wа-я]+([\-\.]{1}[a-z0-9\wа-я]+)*\.[a-z\wа-я]{2,5}(:[0-9]{1,5})?(\/.*)?$/im)
      
       var element = document.getElementById("text");
       function send_link(){
       var destroy_after=document.getElementById('destroy_after').value
       var error_before=document.getElementById('error_before').value
-      let string =input_element.value.trim();
+      var string =input_element.value.trim();
       if(!(regex2.test(string))){
         document.getElementById("ab").innerHTML = "Wrong link";
           element.classList.remove("ok");
