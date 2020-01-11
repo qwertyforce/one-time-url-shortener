@@ -30,12 +30,12 @@ app.use( function(req, res, next) {
 });
 function handle_link(req,res,id){
     var link=Links[id];
-   if (link.error_before!==0) {
+   if (link.error_before>0) {
     Links[id].error_before-=1;
     res.sendStatus(404)
     return
    }
-   if(link.destroy_after!==0){
+   if(link.destroy_after>0){
      Links[id].destroy_after-=1;
      res.redirect(link.url);
      return
