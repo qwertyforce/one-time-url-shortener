@@ -55,7 +55,7 @@ app.post('/link', (req, res) => {
   if (!req.body) {
     return res.status(400);
   }
-  const Url = req.body.url.trim();
+  let Url = req.body.url.trim();
   const preview_protection = (req.body.preview_protection.trim() === "true") ? 1 : 0;
   const destroy_after = parseInt(req.body.destroy_after.trim());
   const error_before = parseInt(req.body.error_before.trim());
