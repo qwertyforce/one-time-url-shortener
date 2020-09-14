@@ -12,7 +12,7 @@ button.addEventListener("click", save_link);
       function save_link(){
       var string =input_element.value.trim();
       if(string===''){
-        string="https://link.qwertyforce.ru"
+        string="https://link.qwertyforce.dev"
       }
       if(!(regex2.test(string))){
         alert('Wrong url');
